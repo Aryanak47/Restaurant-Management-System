@@ -18,6 +18,10 @@ class CashierController extends Controller
         return view('cashier.index')->with('categories', $categories);
 
     }
+    public function printBill($sale_id){
+        $sale = Sale::find($sale_id);
+        return view("cashier/bill")->with('sale', $sale);
+    }
     public function getTable(){
         $tables = Table::all();
         $html="";
@@ -129,9 +133,10 @@ class CashierController extends Controller
         $table = Table::find($sale->table_id);
         $table->status = "available";
         $table->save();
-        return "/cashier";
+        return "/cashier/print";
 
     }
+ 
 
     private function getSaleDetail($sale_id){
         $sale_details = saleDetail::where('sale_id', $sale_id)->get();

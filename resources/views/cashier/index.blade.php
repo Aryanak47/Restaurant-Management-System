@@ -102,6 +102,7 @@
     })
     let selectedTableId = ""
     let selectedTableName = ""
+    let saleId = ""
     $("#tableDetail").on("click",".btn-table",function(){
         selectedTableId = $(this).data('id');
         selectedTableName = $(this).data('name');
@@ -191,6 +192,7 @@
        const receivedAmount =  $("#amountReceived").val()
        const change =  $(".total_change").text() 
        const sale = $("#btn-payment").data('sale')
+       saleId = sale
        $.ajax({
             type: "POST",
             url: `/cashier/savePayment`,
@@ -201,7 +203,8 @@
                 total_received:receivedAmount
             },
             success: function(data){
-               window.location.href = data
+                console.log(data);
+               window.location.href = `${data}/${saleId}`
             }
         })
         

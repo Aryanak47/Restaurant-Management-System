@@ -36,3 +36,4 @@ Route::get("/cashier/getMenuByTable/{table_id}","cashier\CashierController@getMe
 Route::Post("/cashier/confirmOrder","cashier\CashierController@confirmOrder");
 Route::Post("/cashier/deleteOrderItem","cashier\CashierController@deleteOrderItem");
 Route::Post("/cashier/savePayment","cashier\CashierController@savePayment");
+Route::get("/cashier/print/{sale_id}","cashier\CashierController@printBill");
