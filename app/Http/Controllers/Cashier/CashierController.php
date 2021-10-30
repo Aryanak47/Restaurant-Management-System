@@ -97,7 +97,7 @@ class CashierController extends Controller
     public function confirmOrder(Request $request){
         $sale_id = $request->sale_id;
         $sale_details = saleDetail::where('sale_id',$sale_id)->update(['status' => "confirm"]);
-        $html = getSaleDetail($sale_id);
+        $html = $this->getSaleDetail($sale_id);
         return $html;
 
     }
@@ -135,6 +135,7 @@ class CashierController extends Controller
 
     private function getSaleDetail($sale_id){
         $sale_details = saleDetail::where('sale_id', $sale_id)->get();
+       
         $html = '<div class="table-responsive-md" style="height=400px;overflow-y:scroll;border:1px solid #ccc">
         <table class="table table-dark">
                     <thead>
@@ -165,7 +166,7 @@ class CashierController extends Controller
         $sale = Sale::find($sale_id);
         $html .='<hr><h3 class="totalPrice font-weight-normal">Total Price : Rs.<span>'.number_format($sale->total_price).'</span></h3>';
         if($btnPayment){
-            $html .='<button type="button" class="mt-5 font-weight-bold btn btn-success btn-block btn-payment" data-totalAmount="'.number_format($sale->total_price).'" data-toggle="modal" data-target="#paymentModal" data-sale="'.$sale->id.'">Payment</button>';
+            $html .='<button type="button" id="btn-payment" class="mt-5 font-weight-bold btn btn-success btn-block" data-totalAmount="'.$sale->total_price.'" data-toggle="modal" data-target="#paymentModal" data-sale="'.$sale->id.'">Payment</button>';
         }else{
             $html .='<button type="button" class="mt-5 font-weight-bold btn btn-warning btn-confirm btn-block"  data-sale="'.$sale->id.'">Confirm Order</button>';
         }

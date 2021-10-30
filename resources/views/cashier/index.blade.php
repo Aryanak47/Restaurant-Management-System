@@ -170,9 +170,9 @@
         })
     })
     $("#amountReceived").keyup(function(event){
-        const receivedAmount = $(this).val().trim() ;
-        const totalAmount = $(".btn-payment").attr('data-totalAmount') 
-        const change =   receivedAmount - totalAmount
+        let receivedAmount = $(this).val().trim()*1 ;
+        let totalAmount = $("#btn-payment").attr('data-totalamount')*1
+        let change =   receivedAmount - totalAmount 
         if(change >= 0){
             $("#savepaymentButton").prop("disabled",false)
             $(".total_change").text(change)
@@ -181,8 +181,8 @@
         }
         $("#savepaymentButton").prop("disabled",true)
     })
-    $("#orderedItem").on("click",".btn-payment",function (event){
-        const totalAmount = $(".btn-payment").attr('data-totalAmount')
+    $("#orderedItem").on("click","#btn-payment",function (event){
+        const totalAmount = $("#btn-payment").attr('data-totalamount')
         $(".totalPayment").text(totalAmount)
         $("#amountReceived").val("")
         $(".total_change").text("")
@@ -190,7 +190,7 @@
     $("#savepaymentButton").click(function (event){
        const receivedAmount =  $("#amountReceived").val()
        const change =  $(".total_change").text() 
-       const sale = $(".btn-payment").data('sale')
+       const sale = $("#btn-payment").data('sale')
        $.ajax({
             type: "POST",
             url: `/cashier/savePayment`,
