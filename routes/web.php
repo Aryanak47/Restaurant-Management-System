@@ -37,3 +37,7 @@ Route::Post("/cashier/confirmOrder","cashier\CashierController@confirmOrder");
 Route::Post("/cashier/deleteOrderItem","cashier\CashierController@deleteOrderItem");
 Route::Post("/cashier/savePayment","cashier\CashierController@savePayment");
 Route::get("/cashier/print/{sale_id}","cashier\CashierController@printBill");
+
+// Report route
+Route::get("/report","Report\ReportController@index");
+Route::get("/report/show","Report\ReportController@showReport");
